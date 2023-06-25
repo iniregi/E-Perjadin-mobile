@@ -36,11 +36,6 @@ public class TransaksiActivity extends AppCompatActivity {
         tanggalSelesaiEditText = findViewById(R.id.tanggalSelesaiEditText);
         lamaDinasEditText = findViewById(R.id.lamaDinasEditText);
         kegiatanPerjadinEditText = findViewById(R.id.kegiatanPerjadinEditText);
-        biayaPenginapanEditText = findViewById(R.id.biayaPenginapanEditText);
-        biayaTransportasiEditText = findViewById(R.id.biayaTransportasiEditText);
-        uangHarianEditText = findViewById(R.id.uangHarianEditText);
-        uangPendampingEditText = findViewById(R.id.uangPendampingEditText);
-        totalBiayaEditText = findViewById(R.id.totalBiayaEditText);
         resetButton = findViewById(R.id.resetButton);
         submitButton = findViewById(R.id.submitButton);
 
