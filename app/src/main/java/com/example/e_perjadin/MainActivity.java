@@ -32,25 +32,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inisialisasi views
         loginButton = findViewById(R.id.login_button);
         usernameEditText = findViewById(R.id.username_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
 
-        // Set click listener untuk tombol login
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Mengambil nilai dari EditText username dan password
                 String username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
-
-                // Mengecek apakah username dan password tidak kosong
                 if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Username dan password harus diisi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Harap Isi Username dan Password Dengan Benar", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Membuat permintaan login ke server
-                    String url = "http://localhost/E-Perjadin/login.php";
+                    String url = "http://10.0.2.2/E-Perjadin/login.php";
                     RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                             new Response.Listener<String>() {
@@ -61,13 +55,10 @@ public class MainActivity extends AppCompatActivity {
                                         String status = jsonResponse.getString("status");
                                         String message = jsonResponse.getString("message");
                                         if (status.equals("success")) {
-                                            // Login berhasil
                                             Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                                            // Lanjutkan ke aktivitas berikutnya setelah login sukses
-                                            Intent intent = new Intent(MainActivity.this, FormPegawaiActivity.class);
+                                            Intent intent = new Intent(MainActivity.this, PerjalananActivity.class);
                                             startActivity(intent);
                                         } else {
-                                            // Login gagal
                                             Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (JSONException e) {
@@ -77,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // Kesalahan saat melakukan permintaan HTTP
                             Toast.makeText(MainActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }) {
@@ -89,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
                             return params;
                         }
                     };
-
-                    // Menambahkan permintaan ke antrian permintaan
                     queue.add(stringRequest);
                 }
             }
